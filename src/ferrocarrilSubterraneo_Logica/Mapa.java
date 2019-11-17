@@ -2,6 +2,9 @@ package ferrocarrilSubterraneo_Logica;
 
 public class Mapa {
 
+	public static final int nivel_1 = 1;
+	public static final int nivel_2 = 2;
+	
 	private int[][] matrizPesos;
 	private ZonaSegura[] listaPesos;
 	
@@ -11,10 +14,23 @@ public class Mapa {
 	 */
 	private boolean modelo;
 	
-	public Mapa(int[][] nivelElegido, boolean tipoModelo) {
+	public Mapa(int nivelElegido, boolean tipoModelo) {
 		modelo = tipoModelo;
 		
-		// llenaar la lista y la matriz
+		switch (nivelElegido) {
+		
+		case nivel_1:
+			
+			
+			
+			break;
+
+		case nivel_2:
+			
+			
+			
+			break;
+		}
 		
 	}
 	

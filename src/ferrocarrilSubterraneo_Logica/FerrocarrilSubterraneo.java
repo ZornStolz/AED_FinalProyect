@@ -4,7 +4,6 @@ public class FerrocarrilSubterraneo {
 	
 	public static final String nivel_1 = "/AED_FinalProyect/Maps/Nivel1.jpeg";
 	public static final String nivel_2 = "/AED_FinalProyect/Maps/Nivel2.jpeg";
-	public static final String nivel_3 = "/AED_FinalProyect/Maps/Nivel3.jpeg";
 	
 	private int posicion;
 	private int puntaje;
