@@ -66,11 +66,8 @@ public class AlgoritmosGrafos {
 		queue.add(n);
 		visited[n] = true; 
 		
-		ArrayList<Integer> array = new ArrayList<Integer>();
-		
 		while(!queue.isEmpty()){
 			n = queue.poll();
-			array.add(n);
 			
 			ArrayList<Integer> adj = adjacents(n, matrix);
 			
@@ -80,6 +77,35 @@ public class AlgoritmosGrafos {
 					visited[s] = true;
 					queue.add(s);
 					levels[s] = levels[n] + 1;
+				}
+			}
+		}
+		return levels;
+	}
+	
+	public int[] bfsLevelsHastaEl3(int n, int[][] matrix){
+		
+		LinkedList<Integer> queue = new LinkedList<Integer>();
+		int[] levels = new int[matrix.length];
+		boolean visited[] = new boolean[matrix.length]; 
+		
+		queue.add(n);
+		visited[n] = true; 
+		
+		while(!queue.isEmpty()){
+			n = queue.poll();
+			
+			ArrayList<Integer> adj = adjacents(n, matrix);
+			
+			for (int i = 0; i < adj.size(); i++) {
+				int s = adj.get(i);
+				if(!visited[s]){
+					visited[s] = true;
+					queue.add(s);
+					if((levels[n] + 1) > 3)
+						levels[s] = 1;
+					else
+						levels[s] = levels[n] + 1;
 				}
 			}
 		}

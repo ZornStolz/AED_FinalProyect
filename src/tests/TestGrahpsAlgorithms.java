@@ -54,6 +54,25 @@ class TestGrahpsAlgorithms {
 		
 		matrizPesos = new int[9][9];
 		
+		matrizPesos[0][1] = 6;		matrizPesos[1][0] = 6;
+		matrizPesos[0][2] = 10;		matrizPesos[2][0] = 10;
+		matrizPesos[0][4] = 8;		matrizPesos[4][0] = 8;
+		matrizPesos[0][6] = 9;		matrizPesos[6][0] = 9;
+		matrizPesos[1][3] = 5;		matrizPesos[3][1] = 5;
+		matrizPesos[2][5] = 2;		matrizPesos[5][2] = 2;
+		matrizPesos[3][4] = 3;		matrizPesos[4][3] = 3;
+		matrizPesos[4][5] = 7;		matrizPesos[5][4] = 7;
+		matrizPesos[6][7] = 1;		matrizPesos[7][6] = 1;
+		matrizPesos[6][8] = 2;		matrizPesos[8][6] = 2;
+		matrizPesos[7][8] = 4;		matrizPesos[8][7] = 4;
+	}
+	
+	void setUp4(){
+		
+		algoritmo = new AlgoritmosGrafos();
+		
+		matrizPesos = new int[9][9];
+		
 		for(int i = 0; i < matrizPesos.length; i++)
 			for(int j = 0; j < matrizPesos.length; j++)
 				matrizPesos[i][j] = infinito;
@@ -93,6 +112,18 @@ class TestGrahpsAlgorithms {
 		System.out.println();
 		int y = -1;
 		for(int x: algoritmo.bfsLevels(0, matrizPesos))
+			System.out.println((y+=1) + " " +x);
+		System.out.println();
+	}
+	
+	@Test
+	void testBFSNivelesHastaEl3() {
+		setUp3();
+		System.out.println();
+		System.out.println("Niveles hasta el 3");
+		System.out.println();
+		int y = -1;
+		for(int x: algoritmo.bfsLevelsHastaEl3(7, matrizPesos))
 			System.out.println((y+=1) + " " +x);
 		System.out.println();
 	}
@@ -140,7 +171,7 @@ class TestGrahpsAlgorithms {
 	
 	@Test
 	void testPrim() {
-		setUp3();		
+		setUp4();		
 		System.out.println();
 		System.out.println("Prim");
 		algoritmo.prim(matrizPesos);		
@@ -150,7 +181,7 @@ class TestGrahpsAlgorithms {
 	@Test
 	void testKruskal() {
 		
-		setUp3();		
+		setUp4();		
 		System.out.println();
 		System.out.println("kruskal");
 		
