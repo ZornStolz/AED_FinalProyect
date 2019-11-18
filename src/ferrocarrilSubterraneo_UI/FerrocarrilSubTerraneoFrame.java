@@ -13,6 +13,7 @@ public class FerrocarrilSubTerraneoFrame extends JFrame{
 	private PanelVictoria panelVictoria;
 	
 	private FerrocarrilSubterraneo logica;
+	private int mapa;
 	
 	public FerrocarrilSubTerraneoFrame(){
 		
@@ -35,11 +36,15 @@ public class FerrocarrilSubTerraneoFrame extends JFrame{
 		remove(panelInicio);
 		
 		logica = new FerrocarrilSubterraneo(nivel, modelo);
-		
+		mapa = nivel;
 		panelJuego = new PanelJuego(this, logica.mostrarMapa(nivel));
 		add(panelJuego);
 		revalidate();
 	}
+//	
+//	public void  repaint() {
+//		panelJuego.repaint();
+//	}
 	
 	void gameOver() {
 		

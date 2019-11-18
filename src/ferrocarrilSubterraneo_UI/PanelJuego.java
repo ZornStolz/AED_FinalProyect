@@ -3,14 +3,12 @@ package ferrocarrilSubterraneo_UI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.*;
 import java.awt.*;
 
-import javax.swing.event.MouseInputListener;
-
 @SuppressWarnings("serial")
-public class PanelJuego extends JPanel implements ActionListener, MouseInputListener
-{
+public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 
 	public  static final String Cambiar = "Cambiar Modelo";
 	
@@ -23,8 +21,9 @@ public class PanelJuego extends JPanel implements ActionListener, MouseInputList
 	public PanelJuego(FerrocarrilSubTerraneoFrame obj, String nivel) {
 		
 		principal = obj;
-		principal.setLocation(0, 50);
-		principal.setSize(1280, 600);
+		principal.setLocation(0, 0);
+		principal.setSize(1280, 650);
+		addMouseListener(this);
 		
 		ImgNivel = new JLabel(new ImageIcon(nivel));
 		
@@ -55,10 +54,20 @@ public class PanelJuego extends JPanel implements ActionListener, MouseInputList
 		// TODO Auto-generated method stub
 		
 	}
-
+//
+//	public void paintComponent(Graphics g, int x, int y){
+//		super.paintComponent(g);
+//		Graphics2D g2 = (Graphics2D) g;
+//		
+//		g2.setColor(Color.YELLOW);
+//		g2.fillOval(x, y, 200,200);
+//	}
+	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mouseClicked(MouseEvent mouse) {
+		System.out.println(mouse.getX()+ ", " + mouse.getY());		
+
+//		principal.repaint();
 		
 	}
 
@@ -75,25 +84,11 @@ public class PanelJuego extends JPanel implements ActionListener, MouseInputList
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void mousePressed(MouseEvent mouse) {
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
