@@ -18,16 +18,19 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 	private JLabel labPuntaje;
 	private JButton butCambiar;
 	
+	private int empezo;
+	
 	public PanelJuego(FerrocarrilSubTerraneoFrame obj, String nivel) {
 		
 		principal = obj;
 		principal.setLocation(0, 0);
 		principal.setSize(1280, 650);
 		addMouseListener(this);
+		empezo = -1;
 		
 		ImgNivel = new JLabel(new ImageIcon(nivel));
 		
-		labPuntaje = new JLabel("100");
+		labPuntaje = new JLabel("" + principal.getPuntaje());
 		
 		butCambiar = new JButton(Cambiar);
 		butCambiar.setActionCommand(Cambiar);
@@ -46,6 +49,7 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 		
 		constraints.gridx = 0;
 		constraints.gridy = 1;
+		constraints.gridwidth = 2;
 		add(ImgNivel, constraints);		
 	}
 	
@@ -54,21 +58,29 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
-//
-//	public void paintComponent(Graphics g, int x, int y){
-//		super.paintComponent(g);
-//		Graphics2D g2 = (Graphics2D) g;
-//		
-//		g2.setColor(Color.YELLOW);
-//		g2.fillOval(x, y, 200,200);
-//	}
 	
 	@Override
 	public void mouseClicked(MouseEvent mouse) {
-		System.out.println(mouse.getX()+ ", " + mouse.getY());		
-
-//		principal.repaint();
 		
+		int vertice = principal.location(mouse.getX(), mouse.getY());
+		
+		if(empezo < 0) {
+			if (vertice > -1 && vertice < 3) {
+				empezo = vertice;
+				principal.cargar(vertice);
+				System.out.println("se cargo");
+			}else
+				JOptionPane.showMessageDialog(null, "seleccione una entrada valida");				
+		}
+		
+		else if(empezo > -1 && vertice > -1) {
+			if(principal.mover(vertice)) {
+				// visualizar cambio
+				System.out.println(principal.getPuntaje());
+			} else
+				JOptionPane.showMessageDialog(null, "seleccione una entrada valida");					
+		} else
+			JOptionPane.showMessageDialog(null, "seleccione una entrada valida");
 	}
 
 	@Override
@@ -80,7 +92,6 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

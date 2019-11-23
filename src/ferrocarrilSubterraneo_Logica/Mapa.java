@@ -13,6 +13,8 @@ public class Mapa {
 	private int[][] matrizPesos;
 	private ZonaSegura[] listaPesos;
 	
+	private Vertice[] listaVertices;
+	
 	private AlgoritmosGrafos algoritmos;
 	
 	/**
@@ -21,7 +23,7 @@ public class Mapa {
 	 */
 	private boolean modelo;
 	
-	public Mapa(int nivelElegido, boolean tipoModelo, int inicio) {
+	public Mapa(int nivelElegido, boolean tipoModelo) {
 		modelo = tipoModelo;
 		algoritmos = new AlgoritmosGrafos();
 		
@@ -29,49 +31,16 @@ public class Mapa {
 		
 		case nivel_1:
 
-			cargarNivel1();			
-			calcularDificultad(inicio);
+			cargarNivel1();	
 			
 			break;
 
 		case nivel_2:
 			
 			cargarNivel2();
-			calcularDificultad(inicio);
 			
 			break;
-		}
-		
-		matrizPesos = new int[nivel.length][nivel.length];
-		
-		for(int i = 0; i < matrizPesos.length; i++)
-			for(int j = 0; j < matrizPesos.length; j++)
-				matrizPesos[i][j] = infinito;
-			
-		for(int i = 0; i < matrizPesos.length; i++)
-			matrizPesos[i][i] = 0;
-		
-		for(int i = 0; i < matrizPesos.length; i++)
-			for(int j = 0; j < matrizPesos.length; j++)
-				if(nivel[i][j] > 0)
-					matrizPesos[i][j] = nivel[i][j];
-		
-		listaPesos = new ZonaSegura[nivel.length];
-		
-		for(int i = 0; i < nivel.length; i++)
-			for(int j = 0; j < nivel.length; j++)
-				if(nivel[i][j] > 0)
-					if(listaPesos[i] != null) {
-						
-						ZonaSegura last = listaPesos[i];
-						
-						while(last.getSiguiente() != null)
-							last = last.getSiguiente();
-						
-						last.setSiguiente(new ZonaSegura(j, nivel[i][j]));
-					}
-					else
-						listaPesos[i] = new ZonaSegura(j, nivel[i][j]);		
+		}	
 	}
 	
 	/**
@@ -101,7 +70,16 @@ public class Mapa {
 		nivel[16][19] = 1;		nivel[19][16] = 1;
 		nivel[17][19] = 1;		nivel[19][17] = 1;
 		nivel[18][19] = 1;		nivel[19][18] = 1;
+				
+		listaVertices = new Vertice[20];
 		
+		listaVertices[0] = new Vertice(26, 53);		listaVertices[7] = new Vertice(400,494);		listaVertices[14] = new Vertice(732,441);
+		listaVertices[1] = new Vertice(59,300);		listaVertices[8] = new Vertice(475,166);		listaVertices[15] = new Vertice(848,98);
+		listaVertices[2] = new Vertice(95,504);		listaVertices[9] = new Vertice(475,349);		listaVertices[16] = new Vertice(855,308);
+		listaVertices[3] = new Vertice(146,156);	listaVertices[10] = new Vertice(556,42);		listaVertices[17] = new Vertice(1015,59);
+		listaVertices[4] = new Vertice(188,377);	listaVertices[11] = new Vertice(605,329);		listaVertices[18] = new Vertice(987,473);
+		listaVertices[5] = new Vertice(312,88);		listaVertices[12] = new Vertice(579,517);		listaVertices[19] = new Vertice(1157,276);
+		listaVertices[6] = new Vertice(336,269);	listaVertices[13] = new Vertice(680,177);		
 	}
 	
 	/**
@@ -145,10 +123,19 @@ public class Mapa {
 		nivel[18][21] = 1;		nivel[21][18] = 1;
 		nivel[19][22] = 1;		nivel[22][19] = 1;
 		nivel[20][22] = 1;		nivel[22][20] = 1;
-		nivel[20][23] = 1;		nivel[29][20] = 1;
+		nivel[20][23] = 1;		nivel[23][20] = 1;
 		nivel[21][23] = 1;		nivel[23][21] = 1;
 		nivel[22][23] = 1;		nivel[23][22] = 1;
 		
+		listaVertices = new Vertice[24];
+		
+		listaVertices[0] = new Vertice(4,234);		listaVertices[7] = new Vertice(334,301);		listaVertices[14] = new Vertice(703,521);	listaVertices[21] = new Vertice(1112,511);	
+		listaVertices[1] = new Vertice(79,87);		listaVertices[8] = new Vertice(324,478);		listaVertices[15] = new Vertice(762,119);	listaVertices[22] = new Vertice(1189,133);
+		listaVertices[2] = new Vertice(70,511);		listaVertices[9] = new Vertice(447,184);		listaVertices[16] = new Vertice(795,315);	listaVertices[23] = new Vertice(1200,317);
+		listaVertices[3] = new Vertice(108,326);	listaVertices[10] = new Vertice(438,407);		listaVertices[17] = new Vertice(903,151);
+		listaVertices[4] = new Vertice(189,194);	listaVertices[11] = new Vertice(577,99);		listaVertices[18] = new Vertice(89,459);
+		listaVertices[5] = new Vertice(187,472);	listaVertices[12] = new Vertice(592,310);		listaVertices[19] = new Vertice(1025,36);
+		listaVertices[6] = new Vertice(338,83);		listaVertices[13] = new Vertice(532,527);		listaVertices[20] = new Vertice(1047,299);
 	}
 	
 	/**
@@ -156,7 +143,39 @@ public class Mapa {
 	 * @param verticeinicial punto de inicio del jugador
 	 */
 	public void calcularDificultad(int verticeinicial){		
+		
 		asignarDificultad(algoritmos.bfsLevelsHastaEl3(verticeinicial, nivel));		
+		
+		matrizPesos = new int[nivel.length][nivel.length];
+		
+		for(int i = 0; i < matrizPesos.length; i++)
+			for(int j = 0; j < matrizPesos.length; j++)
+				matrizPesos[i][j] = infinito;
+			
+		for(int i = 0; i < matrizPesos.length; i++)
+			matrizPesos[i][i] = 0;
+		
+		for(int i = 0; i < matrizPesos.length; i++)
+			for(int j = 0; j < matrizPesos.length; j++)
+				if(nivel[i][j] > 0)
+					matrizPesos[i][j] = nivel[i][j];
+		
+		listaPesos = new ZonaSegura[nivel.length];
+		
+		for(int i = 0; i < nivel.length; i++)
+			for(int j = 0; j < nivel.length; j++)
+				if(nivel[i][j] > 0)
+					if(listaPesos[i] != null) {
+						
+						ZonaSegura last = listaPesos[i];
+						
+						while(last.getSiguiente() != null)
+							last = last.getSiguiente();
+						
+						last.setSiguiente(new ZonaSegura(j, nivel[i][j]));
+					}
+					else
+						listaPesos[i] = new ZonaSegura(j, nivel[i][j]);				
 	}
 	
 	private void asignarDificultad(int[] dificultadesDelosVertices) {
@@ -244,7 +263,12 @@ public class Mapa {
 		else
 			modelo = true;
 	}
+	
 	public int[][] getMatrizPesos(){
 		return matrizPesos;
+	}
+	
+	public Vertice[] getVertices() {
+		return listaVertices;
 	}
 }

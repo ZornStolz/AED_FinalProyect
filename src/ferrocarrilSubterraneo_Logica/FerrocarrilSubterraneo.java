@@ -9,16 +9,13 @@ public class FerrocarrilSubterraneo {
 	private int puntaje;
 	private int puntajeMinimo;
 	
-	private int level;
-	private boolean modelo;
-	
 	private Mapa nivel;
 
 	public FerrocarrilSubterraneo (int nivelSelecionado, boolean modelo) {
 		
-		mostrarMapa(nivelSelecionado);
 		puntaje = 100;
-		this.modelo = modelo;
+		mostrarMapa(nivelSelecionado);
+		nivel = new Mapa(nivelSelecionado, modelo);
 	}
 	
 	public String mostrarMapa(int level){
@@ -28,23 +25,38 @@ public class FerrocarrilSubterraneo {
 			return nivel_2;
 	}
 	
-	public void cargarMapa(int inicio) {
-		posicion =  inicio;
-		nivel = new Mapa(level, modelo, inicio);
-		puntajeMinimo =	nivel.puntajeMinimo(inicio, puntaje);
-	}
-	
 	public boolean mover(int destino) {
-		
+				
 		int costo = nivel.estaConectado(posicion, destino);
-		
+			
 		if(costo > 0) {
 			decresePuntaje(costo);
 			posicion = destino;
 			return true;
 		}
 		else
-			return false;
+			return false;		
+	}
+	
+	public int location(int x, int y) {
+		
+		Vertice[] vertices = nivel.getVertices();
+		boolean found = false;
+		int vertice = -1;
+		
+		for(int i = 0; i < vertices.length && !found;  i++){
+			if(x > vertices[i].getX() && x < (vertices[i].getX() + 60))
+				if(y > vertices[i].getY() && y < (vertices[i].getY() + 80)) {
+					vertice = i;
+					found = true;
+				}
+		}
+		return vertice;
+	}
+	
+	public void calcuarDificultad(int vertice) {
+		nivel.calcularDificultad(vertice);
+		puntajeMinimo = nivel.puntajeMinimo(vertice, puntaje);
 	}
 	
 	public int getPuntaje() {
@@ -64,5 +76,9 @@ public class FerrocarrilSubterraneo {
 	
 	public void cambiarModelo() {
 		nivel.cambiarModelo();
+	}
+	
+	public void setPosicion(int inicio) {
+		posicion = inicio;
 	}
 }
