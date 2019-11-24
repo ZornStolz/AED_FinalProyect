@@ -87,7 +87,7 @@ public class PanelInicio extends JPanel implements ActionListener{
 		constraints.fill  = GridBagConstraints.HORIZONTAL;
 		add(txtModelo, constraints);		
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent evento) {
 		

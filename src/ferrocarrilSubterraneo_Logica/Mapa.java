@@ -133,7 +133,7 @@ public class Mapa {
 		listaVertices[1] = new Vertice(79,87);		listaVertices[8] = new Vertice(324,478);		listaVertices[15] = new Vertice(762,119);	listaVertices[22] = new Vertice(1189,133);
 		listaVertices[2] = new Vertice(70,511);		listaVertices[9] = new Vertice(447,184);		listaVertices[16] = new Vertice(795,315);	listaVertices[23] = new Vertice(1200,317);
 		listaVertices[3] = new Vertice(108,326);	listaVertices[10] = new Vertice(438,407);		listaVertices[17] = new Vertice(903,151);
-		listaVertices[4] = new Vertice(189,194);	listaVertices[11] = new Vertice(577,99);		listaVertices[18] = new Vertice(89,459);
+		listaVertices[4] = new Vertice(189,194);	listaVertices[11] = new Vertice(577,99);		listaVertices[18] = new Vertice(889,459);
 		listaVertices[5] = new Vertice(187,472);	listaVertices[12] = new Vertice(592,310);		listaVertices[19] = new Vertice(1025,36);
 		listaVertices[6] = new Vertice(338,83);		listaVertices[13] = new Vertice(532,527);		listaVertices[20] = new Vertice(1047,299);
 	}
@@ -270,5 +270,9 @@ public class Mapa {
 	
 	public Vertice[] getVertices() {
 		return listaVertices;
+	}
+	
+	public boolean getModelo() {
+		return  modelo;
 	}
 }

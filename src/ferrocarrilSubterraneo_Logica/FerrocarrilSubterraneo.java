@@ -63,6 +63,10 @@ public class FerrocarrilSubterraneo {
 		return puntaje;
 	}
 	
+	public int getPuntajeMinimo() {
+		return puntajeMinimo;
+	}
+	
 	public void decresePuntaje(int costo) {
 		puntaje -= costo;
 	}
@@ -76,6 +80,10 @@ public class FerrocarrilSubterraneo {
 	
 	public void cambiarModelo() {
 		nivel.cambiarModelo();
+	}
+	
+	public boolean getModelo() {
+		return nivel.getModelo();
 	}
 	
 	public void setPosicion(int inicio) {

@@ -4,7 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.*;
+
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import java.awt.*;
 
 @SuppressWarnings("serial")
@@ -19,18 +24,20 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 	private JButton butCambiar;
 	
 	private int empezo;
+	private AudioStream audio;
 	
-	public PanelJuego(FerrocarrilSubTerraneoFrame obj, String nivel) {
+	public PanelJuego(FerrocarrilSubTerraneoFrame obj, String nivel, AudioStream song) {
 		
 		principal = obj;
 		principal.setLocation(0, 0);
 		principal.setSize(1280, 650);
 		addMouseListener(this);
 		empezo = -1;
+		audio = song;
 		
 		ImgNivel = new JLabel(new ImageIcon(nivel));
 		
-		labPuntaje = new JLabel("" + principal.getPuntaje());
+		labPuntaje = new JLabel("" + principal.puntaje());
 		
 		butCambiar = new JButton(Cambiar);
 		butCambiar.setActionCommand(Cambiar);
@@ -56,7 +63,12 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		principal.cambiarModelo();
 		
+		if(principal.getModelo())
+			JOptionPane.showMessageDialog(null, "Modelo cambio de Lista de adyacencia con pesos a matriz de pesos", "Modelo Cambiado", 1);
+		else
+			JOptionPane.showMessageDialog(null, "Modelo cambio de matriz de pesos a Lista de adyacencia con pesos", "Modelo Cambiado", 1);
 	}
 	
 	@Override
@@ -76,18 +88,22 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 		else if(empezo > -1 && vertice > -1) {
 			if(principal.mover(vertice)) {
 				// visualizar cambio
-				System.out.println(principal.getPuntaje());
+				System.out.println(principal.puntaje());
 			} else
 				JOptionPane.showMessageDialog(null, "seleccione una entrada valida");					
 		} else
 			JOptionPane.showMessageDialog(null, "seleccione una entrada valida");
 		
 		if(principal.getNivelElegido() == 1) {
-			if(vertice == 19) 
+			if(vertice == 19) {
+				AudioPlayer.player.stop(audio);
 				principal.finDelJuego();
+			}
 		} else {
-			if(vertice == 23) 
+			if(vertice == 23) {
+				AudioPlayer.player.stop(audio);
 				principal.finDelJuego();
+			}
 		}
 	}
 	

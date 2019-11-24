@@ -1,16 +1,24 @@
 package ferrocarrilSubterraneo_UI;
 
-import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
 import javax.swing.*;
 import ferrocarrilSubterraneo_Logica.FerrocarrilSubterraneo;
 
 @SuppressWarnings("serial")
 public class FerrocarrilSubTerraneoFrame extends JFrame{
 	
+	public static final String AUDIO = "./media/CenterOfTheEarth.wav";
+	
 	private PanelInicio panelInicio;
 	private PanelJuego panelJuego;
 	private PanelGameOver panelGameOver;
 	private PanelVictoria panelVictoria;
+	
+	private AudioStream audio;
 	
 	private FerrocarrilSubterraneo logica;
 	
@@ -38,9 +46,10 @@ public class FerrocarrilSubTerraneoFrame extends JFrame{
 		
 		logica = new FerrocarrilSubterraneo(nivel, modelo);
 		nivelElegido = nivel;
-		panelJuego = new PanelJuego(this, logica.mostrarMapa(nivel));
+		panelJuego = new PanelJuego(this, logica.mostrarMapa(nivel), audio);
 		add(panelJuego);
 		revalidate();
+		music();
 	}
 	
 	void gameOver() {
@@ -59,9 +68,38 @@ public class FerrocarrilSubTerraneoFrame extends JFrame{
 		revalidate();
 	}
 	
+	@SuppressWarnings("resource")
+	void music() {
+		
+		try {
+			
+//			AudioData data = new AudioStream(new FileInputStream(AUDIO)).getData();
+//			ContinuousAudioDataStream sound = new ContinuousAudioDataStream(data);
+//			AudioPlayer.player.start(sound);
+			
+			InputStream music;
+			music = new FileInputStream(new File(AUDIO));
+			audio = new AudioStream(music);
+			AudioPlayer.player.start(audio);
+			
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Directorio no encontrado");
+		}		
+	}	
+	
 	public void finDelJuego() {
-//		victoria();
-		gameOver();		
+		if(logica.win())
+			victoria();
+		else
+			gameOver();		
+	}
+	
+	public int puntaje() {
+		return logica.getPuntaje();
+	}
+	
+	public int puntajeMinimo() {
+		return logica.getPuntajeMinimo();
 	}
 	
 	public int puntoInicio(int x, int y) {
@@ -81,12 +119,16 @@ public class FerrocarrilSubTerraneoFrame extends JFrame{
 		logica.calcuarDificultad(inicio);
 	}
 	
-	public int getPuntaje() {
-		return logica.getPuntaje();
-	}
-	
 	public int getNivelElegido() {
 		return nivelElegido;
+	}
+	
+	public void cambiarModelo() {
+		logica.cambiarModelo();
+	}
+	
+	public boolean getModelo() {
+		return logica.getModelo();
 	}
 	
 	public static void main(String[] args) {	
