@@ -81,7 +81,16 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 				JOptionPane.showMessageDialog(null, "seleccione una entrada valida");					
 		} else
 			JOptionPane.showMessageDialog(null, "seleccione una entrada valida");
+		
+		if(principal.getNivelElegido() == 1) {
+			if(vertice == 19) 
+				principal.finDelJuego();
+		} else {
+			if(vertice == 23) 
+				principal.finDelJuego();
+		}
 	}
+	
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
