@@ -1,16 +1,15 @@
 package ferrocarrilSubterraneo_UI;
 
+import javax.swing.*;
+import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
-
 import sun.audio.AudioPlayer;
 import sun.audio.AudioStream;
-
-import java.awt.*;
 
 @SuppressWarnings("serial")
 public class PanelJuego extends JPanel implements ActionListener, MouseListener{
@@ -57,7 +56,7 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 		constraints.gridx = 0;
 		constraints.gridy = 1;
 		constraints.gridwidth = 2;
-		add(ImgNivel, constraints);		
+		add(ImgNivel, constraints);	
 	}
 	
 	@Override
@@ -87,8 +86,8 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 		
 		else if(empezo > -1 && vertice > -1) {
 			if(principal.mover(vertice)) {
-				// visualizar cambio
-				System.out.println(principal.puntaje());
+				labPuntaje.setText("" + principal.puntaje());
+				revalidate();
 			} else
 				JOptionPane.showMessageDialog(null, "seleccione una entrada valida");					
 		} else
