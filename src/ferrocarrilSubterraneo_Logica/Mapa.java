@@ -268,6 +268,10 @@ public class Mapa {
 		return matrizPesos;
 	}
 	
+	public ZonaSegura[] getListaPesos(){
+		return listaPesos;
+	}
+	
 	public Vertice[] getVertices() {
 		return listaVertices;
 	}
