@@ -21,6 +21,7 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 	private JLabel ImgNivel;
 	private JLabel labPuntaje;
 	private JButton butCambiar;
+	private JLabel labPosicion;
 	
 	private int empezo;
 	private AudioStream audio;
@@ -36,7 +37,8 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 		
 		ImgNivel = new JLabel(new ImageIcon(nivel));
 		
-		labPuntaje = new JLabel("" + principal.puntaje());
+		labPuntaje = new JLabel("Puntaje: " + principal.puntaje());
+		labPosicion = new JLabel();
 		
 		butCambiar = new JButton(Cambiar);
 		butCambiar.setActionCommand(Cambiar);
@@ -47,15 +49,23 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 		
 		constraints.gridx = 0;
 		constraints.gridy = 0;
+		constraints.gridwidth = 1;
+		constraints.gridheight = 1;
+		constraints.weightx = 1.0;
+		constraints.weighty = 1.0;
 		add(butCambiar, constraints);
 		
 		constraints.gridx = 1;
 		constraints.gridy = 0;
 		add(labPuntaje, constraints);
 		
+		constraints.gridx = 2;
+		constraints.gridy = 0;
+		add(labPosicion, constraints);
+		
 		constraints.gridx = 0;
 		constraints.gridy = 1;
-		constraints.gridwidth = 2;
+		constraints.gridwidth = 3;
 		add(ImgNivel, constraints);	
 	}
 	
@@ -79,14 +89,15 @@ public class PanelJuego extends JPanel implements ActionListener, MouseListener{
 			if (vertice > -1 && vertice < 3) {
 				empezo = vertice;
 				principal.cargar(vertice);
-				System.out.println("se cargo");
+				labPosicion.setText("Posicion actual: " + vertice);
 			}else
 				JOptionPane.showMessageDialog(null, "seleccione una entrada valida");				
 		}
 		
 		else if(empezo > -1 && vertice > -1) {
 			if(principal.mover(vertice)) {
-				labPuntaje.setText("" + principal.puntaje());
+				labPuntaje.setText("Puntaje: " + principal.puntaje());
+				labPosicion.setText("Posicion actual: " + vertice);
 				revalidate();
 			} else
 				JOptionPane.showMessageDialog(null, "seleccione una entrada valida");					

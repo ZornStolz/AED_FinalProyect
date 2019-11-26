@@ -27,7 +27,7 @@ public class FerrocarrilSubTerraneoFrame extends JFrame{
 	public FerrocarrilSubTerraneoFrame(){
 		
 		setTitle("~~~ Ferrocarril Subterraneo ~~~");
-		setSize(255, 400);
+		setSize(300, 400);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -30,17 +30,21 @@ public class PanelInicio extends JPanel implements ActionListener{
 		GridBagConstraints constraints = new GridBagConstraints();
 		
 		labBienvenido = new JLabel("Bienvenido");
-		labInstrucciones  = new JTextArea("clicke pa donde vaya joven");
+		labInstrucciones  = new JTextArea("Escoge un punto de incio entre los 3 con color azul, \n"
+										+ "debes clickear en el. Muevete clickeando en las zo- \n"
+										+ "nas adyacentes que esten conectadas por caminos. \n" 
+										+ "Finaliza con la mayor cantidad de esclavos posible. \n \n"
+										+ "Para elegir el modelo del grafo escoge 0 para la ma \n" 
+										+ "triz de pesos y 1 para la lista de adyacencia con \n"
+										+ "pesos.");
 		labInstrucciones.setEditable(false);
-		labIntroduccion = new JTextArea(" Eres miembro del Ferrocarril subterráneo \n"
-										+ " y tendrás que guiar a un grupo de \n "
-										+ "esclavos a su libertad. \n"
-										+ "El camino estará lleno de peligros \n "
-										+ "y deberás ser cauteloso para no perder \n "
-										+ "a ninguno de tu grupo. \n" 
-										+ "Tu objetivo es llevarlos a un estado seguro, \n "
-										+ "libre del control del sur, pasando por \n "
-										+ "puntos seguros o de descanso.");		
+		labIntroduccion = new JTextArea(  "Eres miembro del Ferrocarril subterráneo y tendrás \n"
+										+ "que guiar a un grupo de esclavos a su libertad.\n "
+										+ "El camino estará lleno de peligros y deberás ser \n "
+										+ "cauteloso para no perder a ninguno de tu grupo. \n "
+										+ "Tu objetivo es llevarlos a un estado seguro, Libre \n "
+										+ "del control del sur, pasando por puntos seguros o \n "
+										+ "de descanso.");		
 		labIntroduccion.setEditable(false);
 		
 		labModelo = new JLabel("Modelo");
@@ -56,6 +60,8 @@ public class PanelInicio extends JPanel implements ActionListener{
 		
 		constraints.gridx = 0;
 		constraints.gridy = 0; 
+		constraints.weightx = 1.0;
+		constraints.weighty = 1.0;
 		constraints.gridwidth = 2;
 		constraints.gridheight = 1;
 		add(labBienvenido, constraints);

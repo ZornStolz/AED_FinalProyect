@@ -2,8 +2,8 @@ package ferrocarrilSubterraneo_Logica;
 
 public class FerrocarrilSubterraneo {
 	
-	public static final String nivel_1 = "./Maps/Nivel1.png";
-	public static final String nivel_2 = "./Maps/Nivel2.png";
+	public static final String nivel_1 = "./Maps/Nivel1.1.png";
+	public static final String nivel_2 = "./Maps/Nivel2.1.png";
 	
 	private int posicion;
 	private int puntaje;
